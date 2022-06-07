@@ -11,16 +11,23 @@ function App() {
       password: values.password,
     }).then((response) => {
       alert(response.data.msg);
+      setMasg(response.data.msg)
     });
   };
 
+  const teste = () => {
+    console.log(msgs)
+    if(msgs === 'logado'){
+      return <h1>Maneu é gay</h1>
+    }
+  }
+  var [msgs, setMasg] = useState('')
   const handleRegister = (values) => {
     Axios.post("http://localhost:3001/register", {
       email: values.email,
       password: values.password,
     }).then((response) => {
       alert(response.data.msg);
-      console.log(response);
     });
   };
 
@@ -52,25 +59,30 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Login</h1>
+      {teste()}
+      <h1>Entre na sua conta: </h1>
       <Formik
         initialValues={{}}
         onSubmit={handleLogin}
         validationSchema={validationsLogin}
       >
         <Form className="login-form">
+
           <div className="login-form-group">
-            <Field name="email" className="form-field" placeholder="Email" />
+            
+            <Field name="email" className="form-field" placeholder="Insira seu email aqui: " />
 
             <ErrorMessage
               component="span"
               name="email"
               className="form-error"
             />
+            
           </div>
+
           {/*Outro campo*/}
           <div className="form-group">
-            <Field name="password" className="form-field" placeholder="Senha" />
+            <Field name="password" className="form-field" placeholder="Insira sua senha aqui: " />
 
             <ErrorMessage
               component="span"
@@ -80,12 +92,12 @@ function App() {
           </div>
 
           <button className="button" type="submit">
-            Login
+            Entrar na minha conta
           </button>
         </Form>
       </Formik>
       {/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
-      <h1>Cadastro</h1>
+      <h1>Ou faça seu cadastro: </h1>
       <Formik
         initialValues={{}}
         onSubmit={handleRegister}
@@ -93,7 +105,7 @@ function App() {
       >
         <Form className="register-form">
           <div className="register-form-group">
-            <Field name="email" className="form-field" placeholder="Email" />
+            <Field name="email" className="form-field" placeholder="Email para cadastro aqui: " />
 
             <ErrorMessage
               component="span"
@@ -103,7 +115,7 @@ function App() {
           </div>
 
           <div className="form-group">
-            <Field name="password" className="form-field" placeholder="Senha" />
+            <Field name="password" className="form-field" placeholder="Senha para cadastro: " />
 
             <ErrorMessage
               component="span"
@@ -116,7 +128,7 @@ function App() {
             <Field
               name="confirmation"
               className="form-field"
-              placeholder="Senha"
+              placeholder="Repita a senha de cadastro: "
             />
 
             <ErrorMessage
@@ -127,7 +139,7 @@ function App() {
           </div>
 
           <button className="button" type="submit">
-            Cadastrar
+            Cadastrar nova conta
           </button>
         </Form>
       </Formik>

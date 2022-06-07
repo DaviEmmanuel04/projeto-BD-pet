@@ -6,12 +6,12 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const User = require('./User2');
 
-// const db = mysql.createPool({
-//   host: "localhost",
-//   user: "root",
-//   password: "password",
-//   database: "banco-pet",
-// });
+const db2 = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "password",
+  database: "petinho",
+});
 
 const db = require("./db")
 
@@ -59,29 +59,40 @@ app.post("/register", async (req, res) => {
 //   });
  });
 
-app.post("/login", (req, res) => {
+app.post("/login", async(req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
-    if (err) {
-      res.send(err);
+  const emailExiste = await User.findOne({ where: { email: email } });
+  if (emailExiste === null) {
+    res.send({ msg: "erro" });
+  } else {
+    if(emailExiste.senha === password){
+      res.send({ msg: "logado" });
+    }else{
+      res.send({ msg: "erro" });
     }
-    if (result.length > 0) {
-      bcrypt.compare(password, result[0].password, (error, response) => {
-        if (error) {
-          res.send(error);
-        }
-        if (response) {
-          res.send({ msg: "Usuário logado" });
-        } else {
-          res.send({ msg: "Senha incorreta" });
-        }
-      });
-    } else {
-      res.send({ msg: "Usuário não registrado!" });
-    }
-  });
+  }
+
+  // db2.query("SELECT * FROM clientes2s WHERE email = ?", [email], (err, result) => {
+  //   if (err) {
+  //     res.send(err);
+  //   }
+  //   if (result.length > 0) {
+  //     bcrypt.compare(password, result[0].password, (error, response) => {
+  //       if (error) {
+  //         res.send(error);
+  //       }
+  //       if (response) {
+  //         res.send({ msg: "Usuário logado" });
+  //       } else {
+  //         res.send({ msg: "Senha incorreta" });
+  //       }
+  //     });
+  //   } else {
+  //     res.send({ msg: "Usuário não registrado!" });
+  //   }
+  // });
 });
 
 app.listen(3001, () => {

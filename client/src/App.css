@@ -1,29 +1,83 @@
 .container {
-  width: 200px;
-  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+  width: 50%;
   margin: auto;
-  background-color: #ebebeb;
-  padding: 20px 15px;
-  margin-top: 120px;
-  border-radius: 7px;
+  background: #fff;
+  border-color: #000;
+  padding: 20px 40px;
   font-family: Roboto, sans-serif;
-  box-shadow: 10px 11px rgba(0, 0, 0, 0.7);
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.1);
+
+  justify-content: center;
+  align-items: center;
 }
+
 h1 {
-  margin: 0;
-  text-align: left;
-  margin-bottom: 10px;
+  font-size: 20px;
+  margin-top: 15px;
 }
 
 .login-form {
-  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 50%;
+  margin: 0;
+  text-align: center;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 20px;
+  width: 50%;
+  margin: 0;
+  text-align: center;
+}
+
+.login-form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.register-form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
 }
 
 .form-field {
-  display: inline-block;
-  padding: 5px;
-  margin-top: 20px;
-  transition: all 0.2s ease-in-out;
+  display: flex;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.1);
+  background: #fbfbfb;
+  width: 100%;
 }
 
 .form-error {
@@ -34,6 +88,23 @@ h1 {
 }
 
 .button {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  display: flex;
+  font-size: 15px;
+  color: #000;
+  background: #00b2ff;
+  border: none;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.1);
+  padding: 15px 30px;
+  border-radius: 10px;
+  justify-content: center;
+  font-weight: bold;
+  width: 100%;
+  margin: 0;
+  transition: 0.3s all;
+}
+
+.button:hover {
+  background: #006895;
+  color: #fff;
+  cursor: pointer;
 }
