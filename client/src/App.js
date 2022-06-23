@@ -1,150 +1,31 @@
-import { useState } from "react";
-import "./App.css";
-import * as yup from "yup";
-import { ErrorMessage, Formik, Form, Field } from "formik";
-import Axios from "axios";
+  import React, { useState } from "react";
+import Login from "./pages/Login/Login";
+import Cadastro from "./pages/Login/Cadastro";
 
-function App() {
-  const handleLogin = (values) => {
-    Axios.post("http://localhost:3001/login", {
-      email: values.email,
-      password: values.password,
-    }).then((response) => {
-      alert(response.data.msg);
-      setMasg(response.data.msg)
-    });
-  };
+function App () {
+  const [cadastro, setCadastro] = useState(false)
 
-  const teste = () => {
-    console.log(msgs)
-    if(msgs === 'logado'){
-      return <h1>Maneu é gay</h1>
+  const abreCadastro = () => {
+    setCadastro(!cadastro)
+    console.log(cadastro)
+  }
+
+  const mostraCadastro = () => {
+    if(cadastro){
+      return <Cadastro abre={abreCadastro}></Cadastro>
+    }else {
+      return <Login abre={abreCadastro}></Login>
     }
   }
-  var [msgs, setMasg] = useState('')
-  const handleRegister = (values) => {
-    Axios.post("http://localhost:3001/register", {
-      email: values.email,
-      password: values.password,
-    }).then((response) => {
-      alert(response.data.msg);
-    });
-  };
-
-  const validationsLogin = yup.object().shape({
-    email: yup
-      .string()
-      .email("email inválido")
-      .required("O email é obrigatório"),
-    password: yup
-      .string()
-      .min(8, "A senha deve ter pelo menos 8 caracteres")
-      .required("A senha é obrigatória"),
-  });
-
-  const validationsRegister = yup.object().shape({
-    email: yup
-      .string()
-      .email("email inválido")
-      .required("O email é obrigatório"),
-    password: yup
-      .string()
-      .min(8, "A senha deve ter pelo menos 8 caracteres")
-      .required("A senha é obrigatória"),
-    confirmation: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "As senhas são diferentes")
-      .required("A confirmação da senha é obrigatória"),
-  });
 
   return (
-    <div className="container">
-      {teste()}
-      <h1>Entre na sua conta: </h1>
-      <Formik
-        initialValues={{}}
-        onSubmit={handleLogin}
-        validationSchema={validationsLogin}
-      >
-        <Form className="login-form">
-
-          <div className="login-form-group">
-            
-            <Field name="email" className="form-field" placeholder="Insira seu email aqui: " />
-
-            <ErrorMessage
-              component="span"
-              name="email"
-              className="form-error"
-            />
-            
-          </div>
-
-          {/*Outro campo*/}
-          <div className="form-group">
-            <Field name="password" className="form-field" placeholder="Insira sua senha aqui: " />
-
-            <ErrorMessage
-              component="span"
-              name="password"
-              className="form-error"
-            />
-          </div>
-
-          <button className="button" type="submit">
-            Entrar na minha conta
-          </button>
-        </Form>
-      </Formik>
-      {/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
-      <h1>Ou faça seu cadastro: </h1>
-      <Formik
-        initialValues={{}}
-        onSubmit={handleRegister}
-        validationSchema={validationsRegister}
-      >
-        <Form className="register-form">
-          <div className="register-form-group">
-            <Field name="email" className="form-field" placeholder="Email para cadastro aqui: " />
-
-            <ErrorMessage
-              component="span"
-              name="email"
-              className="form-error"
-            />
-          </div>
-
-          <div className="form-group">
-            <Field name="password" className="form-field" placeholder="Senha para cadastro: " />
-
-            <ErrorMessage
-              component="span"
-              name="password"
-              className="form-error"
-            />
-          </div>
-
-          <div className="form-group">
-            <Field
-              name="confirmation"
-              className="form-field"
-              placeholder="Repita a senha de cadastro: "
-            />
-
-            <ErrorMessage
-              component="span"
-              name="confirmation"
-              className="form-error"
-            />
-          </div>
-
-          <button className="button" type="submit">
-            Cadastrar nova conta
-          </button>
-        </Form>
-      </Formik>
+    <div className="app">
+      {mostraCadastro()}
+      {/* {cadastro && (
+        <Cadastro></Cadastro>
+      )} */}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

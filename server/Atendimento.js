@@ -1,27 +1,20 @@
 const { INTEGER } = require("sequelize");
+const sequelize = require("sequelize");
 const Sequelize = require("sequelize");
 const db = require("./db");
 
-const User2 = db.define('clientes', {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
+const Atendimento = db.define('atendimentos', {
+    dataAtendimento: {
+        type: Sequelize.DATEONLY,
         primaryKey: true,
-        allowNull: false,
+        allowNull: false
     },
-    nome: {
-        type: Sequelize.STRING,
+    hora: {
+        type: Sequelize.TIME,
+        primaryKey: true,
         allowNull: false
     },
     email: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    senha: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    cpf: {
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -29,10 +22,18 @@ const User2 = db.define('clientes', {
         type: Sequelize.STRING,
         allowNull: false
     },
-
+    nomePet: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    especie: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
+    
 })
 
 // Cria tabela caso não exista
-User2.sync();
+Atendimento.sync();
 
-module.exports = User2;
+module.exports = Atendimento;

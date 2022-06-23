@@ -5,6 +5,8 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const User = require('./User2');
+const Pet = require("./Pet")
+const Atendimento = require("./Atendimento")
 
 const db2 = mysql.createPool({
   host: "localhost",
@@ -13,19 +15,63 @@ const db2 = mysql.createPool({
   database: "petinho",
 });
 
-const db = require("./db")
+const db = require("./db");
+
 
 app.use(express.json());
 app.use(cors());
 
+app.post("/atendimento", async (req, res) => {
+  const dado = req.body.data
+  const hora = req.body.hora
+  const email = req.body.email
+  const telefone = req.body.telefone
+  const nomePet = req.body.nomePet
+  const especie = req.body.especie
+
+  const atendimento = {
+    dataAtendimento: dado,
+    hora: hora,
+    email: email,
+    telefone: telefone,
+    nomePet: nomePet,
+    especie: especie,
+  }
+
+  await Atendimento.create(atendimento)
+    .then(() => {
+      return res.send({msg: "Atendimento cadastrado com suceso"})
+    })
+ })
+
 app.post("/register", async (req, res) => {
   const email = req.body.email;
   const senha = req.body.password;
-  const retorno = {
+  const cpf = req.body.cpf
+  const nomePet = req.body.nomePet
+  const especie = req.body.especie
+  const peso = req.body.peso
+  const telefone = req.body.telefone
+  const nome = req.body.nome
+
+  const cliente = {
     email: email,
     senha: senha,
+    cpf: cpf,
+    telefone: telefone,
+    nome: nome
   }
-  await User.create(retorno)
+
+  const pet = {
+    cpfdono: cpf,
+    nome: nomePet,
+    especie: especie,
+    peso: peso,
+  }
+
+  console.log(pet)
+
+  await User.create(cliente)
     .then(() => {
         return res.send({ msg: "Usuário cadastrado com sucesso" });
     }).catch((err) => {
@@ -35,28 +81,7 @@ app.post("/register", async (req, res) => {
         })
     })
 
-//   db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
-//     if (err) {
-//       res.send(err);
-//     }
-//     if (result.length == 0) {
-//       bcrypt.hash(password, saltRounds, (err, hash) => {
-//         db.query(
-//           "INSERT INTO usuarios (email, password) VALUES (?,?)",
-//           [email, hash],
-//           (error, response) => {
-//             if (err) {
-//               res.send(err);
-//             }
-
-//             res.send({ msg: "Usuário cadastrado com sucesso" });
-//           }
-//         );
-//       });
-//     } else {
-//       res.send({ msg: "Email já cadastrado" });
-//     }
-//   });
+  await Pet.create(pet)
  });
 
 app.post("/login", async(req, res) => {
@@ -64,11 +89,12 @@ app.post("/login", async(req, res) => {
   const password = req.body.password;
 
   const emailExiste = await User.findOne({ where: { email: email } });
+  const petExiste = await Pet.findByPk(emailExiste.cpf);
   if (emailExiste === null) {
     res.send({ msg: "erro" });
   } else {
     if(emailExiste.senha === password){
-      res.send({ msg: "logado" });
+      res.send({ msg: "logado", dado: emailExiste, dadoPet: petExiste });
     }else{
       res.send({ msg: "erro" });
     }

@@ -1,18 +1,45 @@
+html {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  background: #00b2ff75;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  width: 100%;
+  height: auto;
+}
 .container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   border-radius: 10px;
   width: 50%;
-  margin: auto;
+  height: 85vh;
+  margin: 30px 0;
   background: #fff;
   border-color: #000;
-  padding: 20px 40px;
+  padding: 20px 20px;
   font-family: Roboto, sans-serif;
-  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.1);
 
   justify-content: center;
   align-items: center;
+}
+
+.container-filho {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  gap: 30px;
 }
 
 h1 {
@@ -20,35 +47,26 @@ h1 {
   margin-top: 15px;
 }
 
+h4 {
+  margin: 0;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
   width: 50%;
   margin: 0;
-  text-align: center;
-}
-
-.register-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  gap: 20px;
-  width: 50%;
-  margin: 0;
-  text-align: center;
 }
 
 .login-form-group {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 15px;
+  align-items: flex-start;
+  gap: 10px;
   width: 100%;
 }
 
@@ -56,35 +74,29 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-}
-
-.register-form-group {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
+  align-items: flex-start;
+  gap: 10px;
   width: 100%;
 }
 
 .form-field {
   display: flex;
-  padding: 10px 20px;
+  padding: 15px 0 15px 10px;
   border-radius: 5px;
   border: none;
   box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.1);
   background: #fbfbfb;
   width: 100%;
+  transition: 0.3s all;
 }
 
-.form-error {
-  display: block;
-  color: red;
-  font-size: 0.9em;
-  font-weight: 600;
+.form-field:hover {
+  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-field:focus {
+  outline: 0;
+  border: 1px solid #00b2ff;
 }
 
 .button {
@@ -98,13 +110,271 @@ h1 {
   border-radius: 10px;
   justify-content: center;
   font-weight: bold;
-  width: 100%;
+  width: calc(100% + 10px);
   margin: 0;
   transition: 0.3s all;
 }
+
+.container1 {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 50%;
+  margin: 30px 0;
+  background: #fff;
+  border-color: #000;
+  padding: 20px 20px;
+  font-family: Roboto, sans-serif;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-filho1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  gap: 0px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 25px;
+  width: 50%;
+}
+
+.faca {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.dados-usu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 10px;
+}
+
+.register-form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.dados-pet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 10px;
+}
+
+
+
+.form-error {
+  display: block;
+  color: red;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+
 
 .button:hover {
   background: #006895;
   color: #fff;
   cursor: pointer;
+  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.remove {
+  display: none;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.ou-login-cad {
+  display: flex;
+}
+
+.botao-entre-cad {
+  background: none;
+  color: #00b2ff;
+  text-decoration: underline;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s all;
+  
+}
+
+.botao-entre-cad:hover {
+  color: #006895;
+  cursor: pointer;
+}
+
+/* .logadoPai {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 70vh;
+  vertical-align: top;
+  margin-top: 0;
+} */
+
+.logado {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+}
+
+.bem-vindo {
+  font-size: 24px;
+  margin: 0 30px;
+  margin-bottom: 20px;
+}
+
+.tit-dados {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+
+}
+
+.veja-dados {
+  font-size: 20px;
+  margin: 0 30px;
+  margin-bottom: 20px;
+}
+
+.botao-ver {
+  display: flex;
+  align-items: center;
+  border: 1px solid #00b2ff;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  color: #00b2ff;
+  font-size: 14px;
+  background: none;
+}
+
+.mostra-dados {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0 30px;
+  margin-bottom: 30px;
+}
+
+.h3 h3{
+  color: #00b2ff;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.dados {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 25px;
+  padding-right: 100px;
+}
+.dados-do-usu {
+  display: flex;
+  flex-direction: column;
+  line-height: 0;
+  gap: 5px;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.dados-do-usu span {
+  color: #00000090;
+}
+
+.dados-do-pet {
+  display: flex;
+  flex-direction: column;
+  line-height: 0;
+  gap: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.dados-do-pet span {
+  color: #00000090;
+}
+
+.cad {
+  font-size: 20px;
+  margin: 20px 0px 10px 30px;
+}
+
+.div-cadastro-ag {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-cad {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 0 30px;
+}
+.form-fielddh {
+  display: flex;
+  padding: 15px 0 15px 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.1);
+  background: #fbfbfb;
+  width: 100%;
+  transition: 0.3s all;
+}
+
+.form-fielddh:hover {
+  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-fielddh:focus {
+  outline: 0;
+  border: 1px solid #00b2ff;
+}
+
+.bot-log {
+  background: none;
+  border-radius: 5px;
+  border: 1px solid #ff0000;
+  padding: 5px;
+  margin-top: 20px;
+  margin-left: 30px;
+  width: 50px;
+  color: #ff0000;
 }
